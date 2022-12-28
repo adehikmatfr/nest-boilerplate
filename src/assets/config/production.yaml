@@ -1,0 +1,43 @@
+server:
+  port: 8082
+
+snowflake:
+  epoch: 1626670674000
+
+rdbms:
+  slaveDSN: "root:@tcp(localhost:3306)/sales_channel?parseTime=true"
+  masterDSN: "root:@tcp(localhost:3306)/sales_channel?parseTime=true"
+  retryInterval: 5
+  maxIdleConn: 10
+  maxConn: 10
+
+pubsub:
+  projectId: "clodeo-361511"
+  authJsonPath: "assets/pubsub-credential.json"
+  publisherList:
+    scStockUpdatePub: "staging-saleschannel-stock-update"
+    scProductExportPub: "staging-saleschannel-product-export"
+    mdProductCreatePub: "staging-masterdata-product-create"
+    omsSyncOrderPub: "staging-oms-sync-order-sc-completed"
+    scOrderUpdateWebhookReceivedPub: "sc-order-update-webhook-received"
+  subscriberList:
+   scStockUpdateSub: "staging-saleschannel-stock-update-sub"
+   scProductExportSub: "staging-saleschannel-product-export-sub"
+   mdProductCreateCompletedSub: "staging-masterdata-product-create-completed-sc-sub"
+   mdProductDeleteCompletedSub: "staging-masterdata-product-delete-completed-sc-sub"
+   invStockUpdateCompletedSub: "staging-inventory-stock-update-completed-sc-sub"
+   omsSyncOrderCompletedSub: "staging-oms-sync-order-sc-completed-sc-sub"
+   scOrderStatusUpdatedSub: "staging-oms-order-status-updated-sc-sub"
+   scOrderUpdateWebhookReceivedSub: "sc-order-update-webhook-received-sub"
+  enabled: true
+
+redis:
+  host: "localhost"
+  port: 6379
+  password: ""
+  db: 0
+
+tracer:
+  jaeger:
+    collectorUrl: "http://localhost:14268/api/traces"
+    
