@@ -1,8 +1,8 @@
 import { ApiResponseProperty } from '@nestjs/swagger';
 
-import { BaseServiceListResult } from './base-service-list-result';
+import { BaseServiceListDTO } from './base-service-list.dto';
 
-export class BaseResponseList<T> {
+export class BaseResponseListVM<T> {
   @ApiResponseProperty({
     type: Number,
   })
@@ -19,14 +19,14 @@ export class BaseResponseList<T> {
   error: string;
 
   @ApiResponseProperty({
-    type: BaseServiceListResult<T>,
+    type: BaseServiceListDTO<T>,
   })
-  public data: BaseServiceListResult<T>;
+  public data: BaseServiceListDTO<T>;
 
   constructor() {}
 
   setResponseBaseServiceListResult(
-    baseServiceListResult: BaseServiceListResult<T>,
+    baseServiceListResult: BaseServiceListDTO<T>,
   ) {
     if (baseServiceListResult.list.length == 0) {
       this.code = 404;

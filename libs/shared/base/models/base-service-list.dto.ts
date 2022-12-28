@@ -1,6 +1,6 @@
 import { ApiResponseProperty } from '@nestjs/swagger';
 
-export class BaseServiceListResult<T> {
+export class BaseServiceListDTO<T> {
   @ApiResponseProperty({
     type: [],
   })

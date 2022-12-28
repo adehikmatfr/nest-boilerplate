@@ -1,8 +1,8 @@
 import { ApiResponseProperty } from '@nestjs/swagger';
 
-import { BaseServiceResult } from './base-service-result';
+import { BaseServiceDTO } from './base-service.dto';
 
-export class BaseResponse<T> {
+export class BaseResponseVM<T> {
   @ApiResponseProperty({
     type: Number,
   })
@@ -32,7 +32,7 @@ export class BaseResponse<T> {
     }
   }
 
-  setResponseBaseServiceResult(baseServiceResult: BaseServiceResult<T>) {
+  setResponseBaseServiceResult(baseServiceResult: BaseServiceDTO<T>) {
     this.code = baseServiceResult.code;
     this.message = baseServiceResult.message;
     this.error = baseServiceResult.error;

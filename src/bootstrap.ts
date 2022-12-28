@@ -2,9 +2,10 @@ import { INestApplication } from '@nestjs/common';
 import { NestFactory } from '@nestjs/core';
 import { NestExpressApplication } from '@nestjs/platform-express';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
-import { EnvConfigLib } from '@shared/env-config/env-config';
+import { EnvConfigLib } from '@shared/configs/env/env-config';
 import * as bodyParser from 'body-parser';
 
+import { IModelValidatorPipe } from '../libs/shared/pipe/model-validator/i-model-validator';
 import { AppModule } from './module/app.module';
 
 export async function config() {
@@ -31,6 +32,11 @@ export async function run() {
 
   app.use(bodyParser.json({ limit: '50mb' }));
   app.use(bodyParser.urlencoded({ limit: '50mb', extended: true }));
+  app.enableCors();
+  const modelValidatorPipe: IModelValidatorPipe = app.get(
+    'IModelValidatorPipe'
+  );
+  app.useGlobalPipes(modelValidatorPipe);
 
   if (process.env.NODE_ENV != 'production') {
     const options = new DocumentBuilder()
@@ -42,8 +48,6 @@ export async function run() {
     const document = SwaggerModule.createDocument(app, options);
     SwaggerModule.setup('docs', app, document);
   }
-
-  app.enableCors();
 
   if (process.env.NODE_ENV === 'test') {
     await app.init();

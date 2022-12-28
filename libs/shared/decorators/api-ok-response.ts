@@ -1,24 +1,24 @@
 import { applyDecorators, Type } from '@nestjs/common';
 import { ApiExtraModels, ApiOkResponse, getSchemaPath } from '@nestjs/swagger';
 
-import { BaseResponse } from '../base-model/base-response';
-import { BaseResponseList } from '../base-model/base-response-list';
-import { BaseServiceListResult } from '../base-model/base-service-list-result';
+import { BaseResponseListVM } from '../base/models/base-response-list.vm';
+import { BaseResponseVM } from '../base/models/base-response.vm';
+import { BaseServiceListDTO } from '../base/models/base-service-list.dto';
 
 export const ApiOkListResponse = <DataDto extends Type<unknown>>(
   dataDto: DataDto,
 ) =>
   applyDecorators(
-    ApiExtraModels(BaseResponseList, BaseServiceListResult),
-    ApiExtraModels(BaseServiceListResult, dataDto),
+    ApiExtraModels(BaseResponseListVM, BaseServiceListDTO),
+    ApiExtraModels(BaseServiceListDTO, dataDto),
     ApiOkResponse({
       schema: {
         allOf: [
-          { $ref: getSchemaPath(BaseResponseList) },
+          { $ref: getSchemaPath(BaseResponseListVM) },
           {
             properties: {
               data: {
-                $ref: getSchemaPath(BaseServiceListResult),
+                $ref: getSchemaPath(BaseServiceListDTO),
                 properties: {
                   list: {
                     type: 'array',
@@ -37,11 +37,11 @@ export const ApiOkSingleResponse = <DataDto extends Type<unknown>>(
   dataDto: DataDto,
 ) =>
   applyDecorators(
-    ApiExtraModels(BaseResponse, dataDto),
+    ApiExtraModels(BaseResponseVM, dataDto),
     ApiOkResponse({
       schema: {
         allOf: [
-          { $ref: getSchemaPath(BaseResponse) },
+          { $ref: getSchemaPath(BaseResponseVM) },
           {
             properties: {
               data: {

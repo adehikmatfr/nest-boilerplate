@@ -1,4 +1,4 @@
-export class BaseServiceResult<T> {
+export class BaseServiceDTO<T> {
   isSuccess: boolean;
   code: number;
   message: string;
