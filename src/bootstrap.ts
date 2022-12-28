@@ -2,13 +2,13 @@ import { INestApplication } from '@nestjs/common';
 import { NestFactory } from '@nestjs/core';
 import { NestExpressApplication } from '@nestjs/platform-express';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
-import { EnvConfigService } from '@shared/env-config/env-config.service';
+import { EnvConfigLib } from '@shared/env-config/env-config';
 import * as bodyParser from 'body-parser';
 
 import { AppModule } from './module/app.module';
 
 export async function config() {
-  const configService = new EnvConfigService();
+  const configService = new EnvConfigLib();
   const path = require('path');
 
   configService.registerConfigDir(

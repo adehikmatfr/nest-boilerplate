@@ -4,7 +4,7 @@ import { join } from 'path';
 
 import { IEnvConfig } from './i-env-config';
 
-export class EnvConfigService implements IEnvConfig {
+export class EnvConfigLib implements IEnvConfig {
   constructor() {
     this.get('NODE_ENV', 'local');
   }

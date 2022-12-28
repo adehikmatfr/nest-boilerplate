@@ -7,7 +7,7 @@ export class AppController {
   constructor(@Inject('IAppService') protected appService: IAppService) {}
   
   @Get('ping')
-  getHello(): string {
+  ping(): string {
     return this.appService.ping();
   }
 }
