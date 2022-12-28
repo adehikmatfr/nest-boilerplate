@@ -12,7 +12,7 @@ export class ModelValidatorPipe implements IModelValidatorPipe {
 
       const error = this.validateObject(value);
 
-      if (error != "") {
+      if (error != '') {
         const response: BaseResponseVM<any> = new BaseResponseVM<any>();
         response.setResponse(
           HttpStatus.BAD_REQUEST,
@@ -38,24 +38,21 @@ export class ModelValidatorPipe implements IModelValidatorPipe {
       if (validationErrors.length) {
         for (const validationError of validationErrors) {
           if (validationError.constraints) {
-            Object.getOwnPropertyNames(validationError.constraints).forEach(
-              (p) => {
-                return validationError.constraints[p];
-              },
-            );
+            let values = Object.values(validationError.constraints);
+            for (const value of values) {
+              return value;
+            }
           } else {
-            return this.getErrorFromValidationErrors(validationError.children);
+            this.getErrorFromValidationErrors(validationError.children);
           }
         }
       }
     }
-    return ""
+    return '';
   }
 
-  private validateObject<T>(objectToValidate: T): string {
-    const validationErrors: ValidationError[] = validateSync(
-      objectToValidate as Object,
-    );
+  private validateObject<T>(objectToValidate: any): string {
+    const validationErrors: ValidationError[] = validateSync(objectToValidate);
     return this.getErrorFromValidationErrors(validationErrors);
   }
 }
