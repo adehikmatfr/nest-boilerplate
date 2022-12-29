@@ -2,17 +2,15 @@ import { INestApplication } from '@nestjs/common';
 import { NestFactory } from '@nestjs/core';
 import { NestExpressApplication } from '@nestjs/platform-express';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
-import { EnvConfigLib } from '@shared/configs/env/env-config';
+import { EnvConfig } from '@shared/configs/env/env-config';
 import * as bodyParser from 'body-parser';
 
-import { IModelValidatorPipe } from '../libs/shared/pipe/model-validator/i-model-validator';
+import { IModelValidatorPipe } from '../libs/shared/pipes/model-validator/i-model-validator';
 import { AppModule } from './module/app.module';
 
 export async function config() {
-  const configService = new EnvConfigLib();
   const path = require('path');
-
-  configService.registerConfigDir(
+  EnvConfig.registerConfigDir(
     path.resolve(path.join(__dirname, 'assets/config')),
   );
 }
@@ -37,6 +35,7 @@ export async function run() {
     'IModelValidatorPipe'
   );
   app.useGlobalPipes(modelValidatorPipe);
+  app.setGlobalPrefix('api');
 
   if (process.env.NODE_ENV != 'production') {
     const options = new DocumentBuilder()

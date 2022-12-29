@@ -2,14 +2,9 @@ import { existsSync, readFileSync } from 'fs';
 import { load } from 'js-yaml';
 import { join } from 'path';
 
-import { IEnvConfig } from './i-env-config';
 
-export class EnvConfigLib implements IEnvConfig {
-  constructor() {
-    this.get('NODE_ENV', 'local');
-  }
-
-  private get(key: string, defaultValue?: any): any {
+export class EnvConfig  {
+  static get(key: string, defaultValue?: any): any {
     if (
       process.env[key] !== null &&
       process.env[key] !== undefined &&
@@ -23,19 +18,20 @@ export class EnvConfigLib implements IEnvConfig {
     }
   }
 
-  private set(key: string, defaultValue: any): void {
+  static set(key: string, defaultValue: any): void {
     process.env[key] = defaultValue;
   }
 
-  private config(): any {
+  private static config(): any {
     return load(readFileSync(this.get('NODE_CONFIG_DIR'), 'utf8'));
   }
 
-  setConfigName(envName: string = process.env.NODE_ENV): void {
+  static setConfigName(envName: string = process.env.NODE_ENV): void {
     this.set('NODE_CONFIG_ENV', envName);
   }
 
-  registerConfigDir(directori: string): void {
+  static registerConfigDir(directori: string): void {
+    this.get('NODE_ENV', 'local');
     const envName = 'NODE_CONFIG_DIR';
     const selecedEnv = process.env.NODE_ENV;
     const finalDirectories = join(directori, `${selecedEnv}.yaml`);
