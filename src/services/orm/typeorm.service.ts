@@ -1,10 +1,11 @@
 import { Injectable } from '@nestjs/common';
 import { TypeOrmModuleOptions, TypeOrmOptionsFactory } from '@nestjs/typeorm';
+import { EnvConfig } from '@shared/configs/env/env-config';
 
-import { EnvConfig } from '../configs/env/env-config';
+import { UserEntity } from '../../models/users/user.entity';
 
 @Injectable()
-export class TypeOrm implements TypeOrmOptionsFactory {
+export class TypeOrmService implements TypeOrmOptionsFactory {
   constructor() {}
 
   public createTypeOrmOptions(): TypeOrmModuleOptions {
@@ -17,12 +18,10 @@ export class TypeOrm implements TypeOrmOptionsFactory {
       database,
       username,
       password,
-      entities: ['dist/**/*.entity.{js}'],
-      migrations: ['dist/migrations/*.{js}'],
-      migrationsTableName: 'typeorm_migrations',
+      entities: [UserEntity],
       logger: 'file',
       synchronize,
-      autoLoadEntities: true
+      autoLoadEntities: true,
     };
   }
 }

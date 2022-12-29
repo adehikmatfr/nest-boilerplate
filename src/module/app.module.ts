@@ -2,12 +2,16 @@ import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { ModelValidatorPipe } from '@shared/pipes/model-validator/model-validator';
 
-import { TypeOrm } from '../../libs/shared/orms/typeorm';
 import { AppController } from '../controllers/app/app.controller';
+import { UserEntity } from '../models/users/user.entity';
 import { AppService } from '../services/app/app.service';
+import { TypeOrmService } from '../services/orm/typeorm.service';
 
 @Module({
-  imports: [TypeOrmModule.forRootAsync({ useClass: TypeOrm })],
+  imports: [
+    TypeOrmModule.forRootAsync({ useClass: TypeOrmService }),
+    TypeOrmModule.forFeature([UserEntity]),
+  ],
   controllers: [AppController],
   providers: [
     {
