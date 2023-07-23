@@ -1,11 +1,12 @@
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { ModelValidatorPipe } from '@shared/pipes/model-validator/model-validator';
+import { LogInterceptorService } from '@shared/logger/log-interceptor.service';
+import { ModelValidatorPipe } from '@shared/pipe/model-validator.pipe';
 
-import { AppController } from '../controllers/app/app.controller';
-import { UserEntity } from '../models/users/user.entity';
-import { AppService } from '../services/app/app.service';
-import { TypeOrmService } from '../services/orm/typeorm.service';
+import { AppController } from '../controller/app/app.controller';
+import { UserEntity } from '../model/user/user.entity';
+import { AppService } from '../service/app/app.service';
+import { TypeOrmService } from '../service/orm/typeorm.service';
 
 @Module({
   imports: [
@@ -22,6 +23,10 @@ import { TypeOrmService } from '../services/orm/typeorm.service';
     {
       provide: 'IAppService',
       useClass: AppService,
+    },
+    {
+      provide: 'ILogInterceptorService',
+      useClass: LogInterceptorService,
     },
     // controllers modules
   ],

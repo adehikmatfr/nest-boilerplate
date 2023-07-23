@@ -2,8 +2,8 @@ import { ArgumentMetadata, HttpException, HttpStatus } from '@nestjs/common';
 import { plainToClass } from 'class-transformer';
 import { validateSync, ValidationError } from 'class-validator';
 
-import { BaseResponseVM } from '../../base/models/base-response.vm';
-import { IModelValidatorPipe } from './i-model-validator';
+import { BaseResponseVM } from '../base/model/base-response.vm';
+import { IModelValidatorPipe } from './i-model-validator.pipe';
 
 export class ModelValidatorPipe implements IModelValidatorPipe {
   public validateModel(value: any, metadata: ArgumentMetadata): any {
@@ -38,7 +38,7 @@ export class ModelValidatorPipe implements IModelValidatorPipe {
       if (validationErrors.length) {
         for (const validationError of validationErrors) {
           if (validationError.constraints) {
-            let values = Object.values(validationError.constraints);
+            const values = Object.values(validationError.constraints);
             for (const value of values) {
               return value;
             }
@@ -51,7 +51,7 @@ export class ModelValidatorPipe implements IModelValidatorPipe {
     return '';
   }
 
-  private validateObject<T>(objectToValidate: any): string {
+  private validateObject(objectToValidate: any): string {
     const validationErrors: ValidationError[] = validateSync(objectToValidate);
     return this.getErrorFromValidationErrors(validationErrors);
   }

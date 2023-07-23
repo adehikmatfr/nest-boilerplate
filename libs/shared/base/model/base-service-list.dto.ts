@@ -11,6 +11,7 @@ export class BaseServiceListDTO<T> {
   })
   public total: number;
 
+  // eslint-disable-next-line @typescript-eslint/no-empty-function
   constructor() {}
 
   public setDataAndCount(list: T[], total: number): void {

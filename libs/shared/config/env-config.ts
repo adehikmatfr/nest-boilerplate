@@ -2,8 +2,7 @@ import { existsSync, readFileSync } from 'fs';
 import { load } from 'js-yaml';
 import { join } from 'path';
 
-
-export class EnvConfig  {
+export class EnvConfig {
   static get(key: string, defaultValue?: any): any {
     if (
       process.env[key] !== null &&
