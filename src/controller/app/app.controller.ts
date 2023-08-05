@@ -4,7 +4,7 @@ import { AppService } from '../../service/app/app.service';
 
 @Controller()
 export class AppController {
-  constructor(@Inject('IAppService') protected appService: AppService) {}
+  constructor(@Inject('AppService') protected appService: AppService) {}
 
   @Get('ping')
   ping(): string {

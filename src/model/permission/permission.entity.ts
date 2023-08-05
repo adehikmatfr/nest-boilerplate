@@ -1,10 +1,4 @@
-import {
-  Column,
-  Entity,
-  PrimaryGeneratedColumn,
-  ManyToMany,
-  JoinTable,
-} from 'typeorm';
+import { Column, Entity, PrimaryGeneratedColumn, OneToMany } from 'typeorm';
 import { RolePermissionEntity } from '../role_permission/role.permission.entity';
 
 @Entity({
@@ -20,11 +14,10 @@ export class PermissionEntity {
   @Column({ type: 'text' })
   description: string;
 
-  // Define the many-to-many relation with RolePermissionEntity
-  @ManyToMany(
+  // Define the one-to-many relation with role_permissions
+  @OneToMany(
     () => RolePermissionEntity,
-    (rolePermission) => rolePermission.permissions,
+    (rolePermission) => rolePermission.permission,
   )
-  @JoinTable() // Use this decorator on the owning side of the relationship
   role_permissions: RolePermissionEntity[];
 }

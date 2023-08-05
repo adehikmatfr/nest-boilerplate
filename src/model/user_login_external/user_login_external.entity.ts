@@ -1,4 +1,4 @@
-import { Entity, Column, ManyToOne, JoinColumn } from 'typeorm';
+import { Entity, Column, ManyToOne } from 'typeorm';
 import { UserEntity } from '../user/user.entity';
 
 @Entity({
@@ -27,8 +27,7 @@ export class UserLoginExternalEntity {
   })
   updated_at: Date;
 
-  // Define the many-to-one relation with User
+  // Define the many-to-one relation with user
   @ManyToOne(() => UserEntity, (user) => user.user_login_externals)
-  @JoinColumn({ name: 'user_id' }) // Specify the foreign key column name
   user: UserEntity;
 }

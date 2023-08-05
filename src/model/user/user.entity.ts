@@ -3,10 +3,7 @@ import {
   Entity,
   PrimaryGeneratedColumn,
   OneToOne,
-  JoinColumn,
   OneToMany,
-  ManyToMany,
-  JoinTable,
 } from 'typeorm';
 import { UserLoginEntity } from '../user_login/user_login.entity';
 import { UserLoginExternalEntity } from '../user_login_external/user_login_external.entity';
@@ -37,7 +34,7 @@ export class UserEntity {
   @Column({ length: 100 })
   picture_url: string;
 
-  @Column({ length: 1, nullable: false })
+  @Column({ nullable: false })
   status: number;
 
   @Column({ nullable: false })
@@ -60,7 +57,6 @@ export class UserEntity {
   @OneToOne(() => UserLoginEntity, (userLogin) => userLogin.user, {
     cascade: true,
   })
-  @JoinColumn()
   user_login: UserLoginEntity;
 
   // Define the one-to-many relation with user_login_external
@@ -70,8 +66,7 @@ export class UserEntity {
   )
   user_login_externals: UserLoginExternalEntity[];
 
-  // Define the many-to-many relation with RolePermissionEntity
-  @ManyToMany(() => UserRoleEntity, (userRole) => userRole.users)
-  @JoinTable() // Use this decorator on the owning side of the relationship
+  // Define the one-to-many relation with user_roles
+  @OneToMany(() => UserRoleEntity, (userRole) => userRole.role)
   user_roles: UserRoleEntity[];
 }

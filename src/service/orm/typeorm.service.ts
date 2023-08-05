@@ -1,14 +1,14 @@
 import { Injectable } from '@nestjs/common';
 import { TypeOrmModuleOptions, TypeOrmOptionsFactory } from '@nestjs/typeorm';
 import { EnvConfig } from '@shared/config/env_config';
-
-import { UserEntity } from '../../model/user/user.entity';
+import { join } from 'path';
 
 @Injectable()
 export class TypeOrmService implements TypeOrmOptionsFactory {
   constructor() {}
 
   public createTypeOrmOptions(): TypeOrmModuleOptions {
+    const pathEntities = join(__dirname, '..', 'model', '**', '*.entity.ts');
     const { type, host, port, database, username, password, synchronize } =
       EnvConfig.get('rdbms');
     return {
@@ -18,7 +18,7 @@ export class TypeOrmService implements TypeOrmOptionsFactory {
       database,
       username,
       password,
-      entities: [UserEntity],
+      entities: [pathEntities],
       logger: 'file',
       synchronize,
       autoLoadEntities: true,

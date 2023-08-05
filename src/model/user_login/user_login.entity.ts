@@ -20,7 +20,7 @@ export class UserLoginEntity {
   @Column({ nullable: false })
   confirmed: boolean;
 
-  @Column({ length: 1, nullable: false })
+  @Column({ nullable: false })
   confirmation_status: number;
 
   @Column({ length: 100 })
@@ -45,7 +45,7 @@ export class UserLoginEntity {
   })
   updated_at: Date;
 
-  // Define the one-to-one relation with User
+  // Define the one-to-one relation with user
   @OneToOne(() => UserEntity, (user) => user.user_login)
   @JoinColumn({ name: 'user_id' }) // Specify the foreign key column name
   user: UserEntity;

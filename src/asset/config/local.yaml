@@ -4,7 +4,7 @@ rdbms:
   type: 'postgres'
   host: 'localhost'
   port: 5432
-  database: 'dev-test'
-  username: 'root'
+  database: 'nest_boilerplate'
+  username: 'postgres'
   password: 'root'
   synchronize: true

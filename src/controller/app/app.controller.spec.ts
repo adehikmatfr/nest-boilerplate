@@ -11,7 +11,7 @@ describe('AppController', () => {
       controllers: [AppController],
       providers: [
         {
-          provide: 'IAppService',
+          provide: 'AppService',
           useClass: AppServiceImpl,
         },
       ],

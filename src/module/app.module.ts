@@ -28,16 +28,16 @@ import { UserRoleModule } from './user_role.module';
   controllers: [AppController],
   providers: [
     {
-      provide: 'IModelValidatorPipe',
+      provide: 'ModelValidatorPipe',
       useClass: ModelValidatorPipeImpl,
     },
     // service modules
     {
-      provide: 'IAppService',
+      provide: 'AppService',
       useClass: AppServiceImpl,
     },
     {
-      provide: 'ILogInterceptorService',
+      provide: 'LogInterceptorService',
       useClass: LogInterceptorServiceImpl,
     },
     // controllers modules

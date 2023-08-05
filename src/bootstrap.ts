@@ -13,7 +13,7 @@ export async function config() {
   // eslint-disable-next-line @typescript-eslint/no-var-requires
   const path = require('path');
   EnvConfig.registerConfigDir(
-    path.resolve(path.join(__dirname, 'assets/config')),
+    path.resolve(path.join(__dirname, 'asset/config')),
   );
 }
 
@@ -36,9 +36,9 @@ export async function run() {
   app.enableCors();
 
   const logInterceptorService: LogInterceptorService = app.get(
-    'ILogInterceptorService',
+    'LogInterceptorService',
   );
-  const modelValidatorPipe: ModelValidatorPipe = app.get('IModelValidatorPipe');
+  const modelValidatorPipe: ModelValidatorPipe = app.get('ModelValidatorPipe');
   app.useGlobalInterceptors(logInterceptorService);
   app.useGlobalPipes(modelValidatorPipe);
 
