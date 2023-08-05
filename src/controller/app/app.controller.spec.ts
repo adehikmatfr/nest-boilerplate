@@ -1,6 +1,6 @@
 import { Test, TestingModule } from '@nestjs/testing';
 
-import { AppService } from '../../service/app/app.service';
+import { AppServiceImpl } from '../../service/app/app_impl.service';
 import { AppController } from './app.controller';
 
 describe('AppController', () => {
@@ -12,7 +12,7 @@ describe('AppController', () => {
       providers: [
         {
           provide: 'IAppService',
-          useClass: AppService,
+          useClass: AppServiceImpl,
         },
       ],
     }).compile();

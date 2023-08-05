@@ -1,32 +1,44 @@
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { LogInterceptorService } from '@shared/logger/log-interceptor.service';
-import { ModelValidatorPipe } from '@shared/pipe/model-validator.pipe';
+import { LogInterceptorServiceImpl } from '@shared/logger/log_interceptor_impl.service';
+import { ModelValidatorPipeImpl } from '@shared/pipe/model_validator_impl.pipe';
 
 import { AppController } from '../controller/app/app.controller';
-import { UserEntity } from '../model/user/user.entity';
-import { AppService } from '../service/app/app.service';
+import { AppServiceImpl } from '../service/app/app_impl.service';
 import { TypeOrmService } from '../service/orm/typeorm.service';
+import { PermissionModule } from './permission.module';
+import { RoleModule } from './role.module';
+import { RolePermissionModule } from './role_permission.module';
+import { UserModule } from './user.module';
+import { UserLoginModule } from './user_login.module';
+import { UserLoginExternalModule } from './user_login_external.module';
+import { UserRoleModule } from './user_role.module';
 
 @Module({
   imports: [
     TypeOrmModule.forRootAsync({ useClass: TypeOrmService }),
-    TypeOrmModule.forFeature([UserEntity]),
+    RoleModule,
+    PermissionModule,
+    RolePermissionModule,
+    UserModule,
+    UserRoleModule,
+    UserLoginModule,
+    UserLoginExternalModule,
   ],
   controllers: [AppController],
   providers: [
     {
       provide: 'IModelValidatorPipe',
-      useClass: ModelValidatorPipe,
+      useClass: ModelValidatorPipeImpl,
     },
     // service modules
     {
       provide: 'IAppService',
-      useClass: AppService,
+      useClass: AppServiceImpl,
     },
     {
       provide: 'ILogInterceptorService',
-      useClass: LogInterceptorService,
+      useClass: LogInterceptorServiceImpl,
     },
     // controllers modules
   ],

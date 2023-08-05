@@ -2,11 +2,11 @@ import { INestApplication } from '@nestjs/common';
 import { NestFactory } from '@nestjs/core';
 import { NestExpressApplication } from '@nestjs/platform-express';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
-import { EnvConfig } from '@shared/config/env-config';
-import { ILogInterceptorService } from '@shared/logger/i-log-interceptor.service';
+import { EnvConfig } from '@shared/config/env_config';
+import { LogInterceptorService } from '@shared/logger/log_interceptor.service';
 import * as bodyParser from 'body-parser';
 
-import { IModelValidatorPipe } from '../libs/shared/pipe/i-model-validator.pipe';
+import { ModelValidatorPipe } from '../libs/shared/pipe/model_validator.pipe';
 import { AppModule } from './module/app.module';
 
 export async function config() {
@@ -35,12 +35,10 @@ export async function run() {
   app.use(bodyParser.urlencoded({ limit: '50mb', extended: true }));
   app.enableCors();
 
-  const logInterceptorService: ILogInterceptorService = app.get(
+  const logInterceptorService: LogInterceptorService = app.get(
     'ILogInterceptorService',
   );
-  const modelValidatorPipe: IModelValidatorPipe = app.get(
-    'IModelValidatorPipe',
-  );
+  const modelValidatorPipe: ModelValidatorPipe = app.get('IModelValidatorPipe');
   app.useGlobalInterceptors(logInterceptorService);
   app.useGlobalPipes(modelValidatorPipe);
 

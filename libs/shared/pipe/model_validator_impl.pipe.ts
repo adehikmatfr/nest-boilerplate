@@ -2,10 +2,10 @@ import { ArgumentMetadata, HttpException, HttpStatus } from '@nestjs/common';
 import { plainToClass } from 'class-transformer';
 import { validateSync, ValidationError } from 'class-validator';
 
-import { BaseResponseVM } from '../base/model/base-response.vm';
-import { IModelValidatorPipe } from './i-model-validator.pipe';
+import { BaseResponseVM } from '../base/model/base_response.vm';
+import { ModelValidatorPipe } from './model_validator.pipe';
 
-export class ModelValidatorPipe implements IModelValidatorPipe {
+export class ModelValidatorPipeImpl implements ModelValidatorPipe {
   public validateModel(value: any, metadata: ArgumentMetadata): any {
     if (metadata.metatype && metadata.type !== 'param') {
       value = plainToClass(metadata.metatype, value);

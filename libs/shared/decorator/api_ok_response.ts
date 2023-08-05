@@ -1,9 +1,9 @@
 import { applyDecorators, Type } from '@nestjs/common';
 import { ApiExtraModels, ApiOkResponse, getSchemaPath } from '@nestjs/swagger';
 
-import { BaseResponseListVM } from '../base/model/base-response-list.vm';
-import { BaseResponseVM } from '../base/model/base-response.vm';
-import { BaseServiceListDTO } from '../base/model/base-service-list.dto';
+import { BaseResponseListVM } from '../base/model/base_response_list.vm';
+import { BaseResponseVM } from '../base/model/base_response.vm';
+import { BaseServiceListDTO } from '../base/model/base_service_list.dto';
 
 export const ApiOkListResponse = <DataDto extends Type<unknown>>(
   dataDto: DataDto,

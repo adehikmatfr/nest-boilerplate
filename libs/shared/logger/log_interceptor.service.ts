@@ -1,6 +1,6 @@
 import { ExecutionContext, NestInterceptor } from '@nestjs/common';
 
-export interface ILogInterceptorService extends NestInterceptor<any> {
+export interface LogInterceptorService extends NestInterceptor<any> {
   getRequestAndResponseInfo(
     context: ExecutionContext,
     responseBody: any,

@@ -1,5 +1,5 @@
 import { ArgumentMetadata, PipeTransform } from '@nestjs/common';
 
-export interface IModelValidatorPipe extends PipeTransform<any, any> {
+export interface ModelValidatorPipe extends PipeTransform<any, any> {
   validateModel(value: any, metadata: ArgumentMetadata): any;
 }

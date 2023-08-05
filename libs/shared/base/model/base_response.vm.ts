@@ -1,6 +1,6 @@
 import { ApiResponseProperty } from '@nestjs/swagger';
 
-import { BaseServiceDTO } from './base-service.dto';
+import { BaseServiceDTO } from './base_service.dto';
 
 export class BaseResponseVM<T> {
   @ApiResponseProperty({

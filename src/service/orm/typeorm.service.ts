@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { TypeOrmModuleOptions, TypeOrmOptionsFactory } from '@nestjs/typeorm';
-import { EnvConfig } from '@shared/config/env-config';
+import { EnvConfig } from '@shared/config/env_config';
 
 import { UserEntity } from '../../model/user/user.entity';
 

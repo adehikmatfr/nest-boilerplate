@@ -1,10 +1,10 @@
 import { Controller, Inject, Get } from '@nestjs/common';
 
-import { IAppService } from '../../service/app/i-app.service';
+import { AppService } from '../../service/app/app.service';
 
 @Controller()
 export class AppController {
-  constructor(@Inject('IAppService') protected appService: IAppService) {}
+  constructor(@Inject('IAppService') protected appService: AppService) {}
 
   @Get('ping')
   ping(): string {

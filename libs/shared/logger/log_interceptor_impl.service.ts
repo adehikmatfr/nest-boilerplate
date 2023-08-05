@@ -2,9 +2,9 @@ import { CallHandler, ExecutionContext, HttpStatus } from '@nestjs/common';
 import { Observable } from 'rxjs';
 import { tap } from 'rxjs/operators';
 
-import { ILogInterceptorService } from './i-log-interceptor.service';
+import { LogInterceptorService } from './log_interceptor.service';
 
-export class LogInterceptorService implements ILogInterceptorService {
+export class LogInterceptorServiceImpl implements LogInterceptorService {
   public getRequestAndResponseInfo(
     context: ExecutionContext,
     responseBody: any,
