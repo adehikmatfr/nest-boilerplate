@@ -1,15 +1,12 @@
-import { Column, Entity, PrimaryGeneratedColumn, OneToMany } from 'typeorm';
+import { Column, Entity, OneToMany } from 'typeorm';
 import { RolePermissionEntity } from '../role_permission/role.permission.entity';
 
 @Entity({
   name: 'permission',
 })
 export class PermissionEntity {
-  @PrimaryGeneratedColumn('uuid')
-  id: string;
-
   @Column({ length: 50, nullable: false, primary: true })
-  permission_name: string;
+  id: string;
 
   @Column({ type: 'text' })
   description: string;

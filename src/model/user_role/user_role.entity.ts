@@ -9,7 +9,7 @@ export class UserRoleEntity {
   @Column({ type: 'uuid', primary: true })
   user_id: string;
 
-  @Column({ type: 'uuid', primary: true })
+  @Column({ length: 50, nullable: false, primary: true })
   role_id: string;
 
   // Define the many-to-one relation with user

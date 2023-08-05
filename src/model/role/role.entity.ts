@@ -1,4 +1,4 @@
-import { Column, Entity, PrimaryGeneratedColumn, OneToMany } from 'typeorm';
+import { Column, Entity, OneToMany } from 'typeorm';
 import { RolePermissionEntity } from '../role_permission/role.permission.entity';
 import { UserRoleEntity } from '../user_role/user_role.entity';
 
@@ -6,11 +6,8 @@ import { UserRoleEntity } from '../user_role/user_role.entity';
   name: 'role',
 })
 export class RoleEntity {
-  @PrimaryGeneratedColumn('uuid')
-  id: string;
-
   @Column({ length: 50, nullable: false, primary: true })
-  role_name: string;
+  id: string;
 
   @Column({ type: 'text' })
   description: string;
