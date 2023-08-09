@@ -16,5 +16,5 @@ export class PermissionEntity {
     () => RolePermissionEntity,
     (rolePermission) => rolePermission.permission,
   )
-  role_permissions: RolePermissionEntity[];
+  rolePermissions: RolePermissionEntity[];
 }

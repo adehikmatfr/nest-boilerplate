@@ -14,12 +14,12 @@ export class RoleEntity {
 
   // Define the one-to-many relation with user_roles
   @OneToMany(() => UserRoleEntity, (userRole) => userRole.role)
-  user_roles: UserRoleEntity[];
+  userRoles: UserRoleEntity[];
 
   // Define the one-to-many relation with role_permissions
   @OneToMany(
     () => RolePermissionEntity,
     (rolePermission) => rolePermission.permission,
   )
-  role_permissions: RolePermissionEntity[];
+  rolePermissions: RolePermissionEntity[];
 }

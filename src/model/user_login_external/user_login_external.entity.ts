@@ -6,28 +6,28 @@ import { UserEntity } from '../user/user.entity';
 })
 export class UserLoginExternalEntity {
   @Column({ type: 'uuid', primary: true })
-  user_id: string;
+  userId: string;
 
   @Column({ length: 50, nullable: false, primary: true })
-  channel_id: string;
+  channelId: string;
 
   @Column({ length: 200, nullable: false })
-  ws_end_point: string;
+  wsEndPoint: string;
 
   @Column({ length: 100, nullable: false })
-  external_token: string;
+  externalToken: string;
 
   @Column({ type: 'timestamp', default: () => 'CURRENT_TIMESTAMP' })
-  created_at: Date;
+  createdAt: Date;
 
   @Column({
     type: 'timestamp',
     default: () => 'CURRENT_TIMESTAMP',
     onUpdate: 'CURRENT_TIMESTAMP',
   })
-  updated_at: Date;
+  updatedAt: Date;
 
   // Define the many-to-one relation with user
-  @ManyToOne(() => UserEntity, (user) => user.user_login_externals)
+  @ManyToOne(() => UserEntity, (user) => user.userLoginExternals)
   user: UserEntity;
 }

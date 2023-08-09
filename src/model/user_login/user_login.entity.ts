@@ -6,47 +6,47 @@ import { UserEntity } from '../user/user.entity';
 })
 export class UserLoginEntity {
   @Column({ type: 'uuid', primary: true })
-  user_id: string;
+  userId: string;
 
   @Column({ length: 100, nullable: false, unique: true })
   username: string;
 
   @Column({ length: 250, nullable: false })
-  password_hash: string;
+  passwordHash: string;
 
   @Column({ length: 100, nullable: false })
-  password_salt: string;
+  passwordSalt: string;
 
   @Column({ nullable: false })
   confirmed: boolean;
 
   @Column({ nullable: false })
-  confirmation_status: number;
+  confirmationStatus: number;
 
   @Column({ length: 100 })
-  confirmation_token: string;
+  confirmationToken: string;
 
   @Column({ type: 'timestamp' })
-  confirmation_token_time: Date;
+  confirmationTokenTime: Date;
 
   @Column({ length: 100 })
-  password_recovery_token: string;
+  passwordRecoveryToken: string;
 
   @Column({ type: 'timestamp' })
-  password_recovery_time: Date;
+  passwordRecoveryTime: Date;
 
   @Column({ type: 'timestamp', default: () => 'CURRENT_TIMESTAMP' })
-  created_at: Date;
+  createdAt: Date;
 
   @Column({
     type: 'timestamp',
     default: () => 'CURRENT_TIMESTAMP',
     onUpdate: 'CURRENT_TIMESTAMP',
   })
-  updated_at: Date;
+  updatedAt: Date;
 
   // Define the one-to-one relation with user
-  @OneToOne(() => UserEntity, (user) => user.user_login)
+  @OneToOne(() => UserEntity, (user) => user.userLogin)
   @JoinColumn({ name: 'user_id' }) // Specify the foreign key column name
   user: UserEntity;
 }

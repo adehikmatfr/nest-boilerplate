@@ -20,53 +20,53 @@ export class UserEntity {
   email: string;
 
   @Column({ length: 12, nullable: false, unique: true })
-  phone_number: string;
+  phoneNumber: string;
 
   @Column({ length: 50, nullable: false })
-  first_name: string;
+  firstName: string;
 
   @Column({ length: 50, nullable: false })
-  last_name: string;
+  lastName: string;
 
   @Column({ length: 50, nullable: false })
-  full_name: string;
+  fullName: string;
 
   @Column({ length: 100 })
-  picture_url: string;
+  pictureUrl: string;
 
   @Column({ nullable: false })
   status: number;
 
   @Column({ nullable: false })
-  is_deleted: boolean;
+  isDeleted: boolean;
 
   @Column({ type: 'timestamp', default: () => 'CURRENT_TIMESTAMP' })
-  created_at: Date;
+  createdAt: Date;
 
   @Column({
     type: 'timestamp',
     default: () => 'CURRENT_TIMESTAMP',
     onUpdate: 'CURRENT_TIMESTAMP',
   })
-  updated_at: Date;
+  updatedAt: Date;
 
   @Column({ type: 'timestamp' })
-  deleted_at: Date;
+  deletedAt: Date;
 
   // Define the one-to-one relation with user_login
   @OneToOne(() => UserLoginEntity, (userLogin) => userLogin.user, {
     cascade: true,
   })
-  user_login: UserLoginEntity;
+  userLogin: UserLoginEntity;
 
   // Define the one-to-many relation with user_login_external
   @OneToMany(
     () => UserLoginExternalEntity,
     (userLoginExternal) => userLoginExternal.user,
   )
-  user_login_externals: UserLoginExternalEntity[];
+  userLoginExternals: UserLoginExternalEntity[];
 
   // Define the one-to-many relation with user_roles
   @OneToMany(() => UserRoleEntity, (userRole) => userRole.role)
-  user_roles: UserRoleEntity[];
+  userRoles: UserRoleEntity[];
 }

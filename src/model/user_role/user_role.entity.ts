@@ -7,16 +7,16 @@ import { UserEntity } from '../user/user.entity';
 })
 export class UserRoleEntity {
   @Column({ type: 'uuid', primary: true })
-  user_id: string;
+  userId: string;
 
   @Column({ length: 50, nullable: false, primary: true })
-  role_id: string;
+  roleId: string;
 
   // Define the many-to-one relation with user
-  @ManyToOne(() => UserEntity, (user) => user.user_roles)
+  @ManyToOne(() => UserEntity, (user) => user.userRoles)
   user: UserEntity;
 
   // Define the many-to-one relation with role
-  @ManyToOne(() => RoleEntity, (role) => role.user_roles)
+  @ManyToOne(() => RoleEntity, (role) => role.userRoles)
   role: RoleEntity;
 }

@@ -6,19 +6,16 @@ import { RoleEntity } from '../role/role.entity';
 })
 export class RolePermissionEntity {
   @Column({ length: 50, nullable: false, primary: true })
-  role_id: string;
+  roleId: string;
 
   @Column({ length: 50, nullable: false, primary: true })
-  permission_id: string;
+  permissionId: string;
 
   // Define the many-to-one relation with role
-  @ManyToOne(() => RoleEntity, (role) => role.role_permissions)
+  @ManyToOne(() => RoleEntity, (role) => role.rolePermissions)
   role: RoleEntity;
 
   // Define the many-to-one relation with permission
-  @ManyToOne(
-    () => PermissionEntity,
-    (permission) => permission.role_permissions,
-  )
+  @ManyToOne(() => PermissionEntity, (permission) => permission.rolePermissions)
   permission: PermissionEntity;
 }
